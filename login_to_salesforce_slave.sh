@@ -44,5 +44,9 @@ fi
 echo "sending ${IPADDR} at ${CURDATE}" >> ${LOGFILE}
 wget -O /dev/null https://maker.ifttt.com/trigger/pi_online/with/key/b-V2xCfrEyvA81r8glGf6q?value1=${IPADDR}&value2=v2 >> ${LOGFILE} 2>&1
 
+python3 output_text.py ${IPADDR}
+python3 output_text.py ${IPADDR}
+python3 output_text.py ${IPADDR}
+
 echo "login_to_salesforce_slave.sh done" >> ${LOGFILE}
 exit 0
