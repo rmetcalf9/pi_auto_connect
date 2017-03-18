@@ -6,6 +6,9 @@ if [[ E${CURUSER} != "Eroot" ]]; then
 	exit 1
 fi
 
+SFUSER="guest"
+SFPASSWORD="IBERamPO"
+
 LOGFILE=/home/pi/pi_auto_con/log.txt
 echo "login_to_salesforce_slave.sh start" >> ${LOGFILE}
 
@@ -22,7 +25,7 @@ GOTINTERNET=$(ping -q -w 1 -c 1 ${TESTHOST} > /dev/null 2>&1 && echo ONLINE || e
 echo "Initial network state = ${GOTINTERNET}" >> ${LOGFILE}
 if [[ E${GOTINTERNET} == "EOFFLINE" ]]; then
 	echo "Attempting to login" >> ${LOGFILE}
-	wget -O /home/pi/pi_auto_con/sf_login.html https://guest.corp.salesforce.com/login.html --post-data "buttonClicked=4&err_flag=0&err_msg=&info_flag=0&info_msg=&redirect_url=&network_name=Guest%20Network&username=guest&password=IBERamPO" >> ${LOGFILE} 2>&1
+	wget -O /home/pi/pi_auto_con/sf_login.html https://guest.corp.salesforce.com/login.html --post-data "buttonClicked=4&err_flag=0&err_msg=&info_flag=0&info_msg=&redirect_url=&network_name=Guest%20Network&username=${SFUSER}&password=${SFPASSWORD}" >> ${LOGFILE} 2>&1
 	sleep 3
 	GOTINTERNET=$(ping -q -w 1 -c 1 ${TESTHOST} > /dev/null 2>&1 && echo ONLINE || echo OFFLINE)
 	if [[ E${GOTINTERNET} == "EOFFLINE" ]]; then
